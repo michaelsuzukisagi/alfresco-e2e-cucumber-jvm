@@ -1,19 +1,17 @@
-## Cucumber-Java Skeleton
+## Alfresco Functional test
 
-This is the simplest possible build script setup for Cucumber using Java.
-There is nothing fancy like a webapp or browser testing. All this does is to show you how
-to install and run Cucumber!
+This is a poc project to see how functional test can be used to test Alfresco's new features using Cucumber and Java.
 
 ### Get the code
 
 Git:
 
-    git clone https://github.com/cucumber/cucumber-java-skeleton.git
-    cd cucumber-java-skeleton
+    git clone https://github.com/michaelsuzukisagi/alfresco-e2e-cuecumber-jvm.git
+    cd alfresco-e2e-cuecumber-jvm
 
 Subversion:
 
-    svn checkout https://github.com/cucumber/cucumber-java-skeleton
+    svn checkout https://github.com/michaelsuzukisagi/alfresco-e2e-cuecumber-jvm.git
     cd cucumber-java-skeleton
 
 Or simply [download](https://github.com/cucumber/cucumber-java-skeleton/releases) a zip or tarball.
