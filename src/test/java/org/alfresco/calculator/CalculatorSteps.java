@@ -5,22 +5,22 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 /**
- * Calculator addition feature steps.
- *  
+ * Calculator feature steps.
+ *
  * @author Michael Suzuki
  *
  */
-public class CalculatorSteps 
+public class CalculatorSteps
 {
     private Calculator calculator;
-    private int result; 
-    
+    private int result;
+
     @Given("^I have a calculator")
-    public void I_have_calculator() throws Throwable 
+    public void iHaveCalculator() throws Throwable
     {
         calculator = new Calculator();
     }
-    
+
     @When("^I add (\\d+) and (\\d+)$")
     public void calculatorAdd(int number1, int number2) throws Throwable
     {
@@ -29,10 +29,16 @@ public class CalculatorSteps
             result = calculator.addition(number1, number2);
         }
     }
-    
+
     @Then("^outcome should be (\\d+)$")
-    public void assertAddtion(int expected) throws Throwable
+    public void outShouldBe(int expected) throws Throwable
     {
         Assert.assertEquals(expected, result);
+    }
+
+    @When("^I subtract (\\d+) from (\\d+)$")
+    public void iSubtractFrom(int arg1, int arg2) throws Throwable
+    {
+        result = calculator.subtraction(arg1, arg2);
     }
 }
