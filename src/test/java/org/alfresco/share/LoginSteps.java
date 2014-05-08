@@ -1,6 +1,15 @@
 package org.alfresco.share;
 
-import cucumber.api.PendingException;
+import org.alfresco.po.share.DashBoardPage;
+import org.alfresco.po.share.LoginPage;
+import org.alfresco.webdrone.WebDrone;
+import org.junit.Assert;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -12,24 +21,44 @@ import cucumber.api.java.en.When;
  */
 public class LoginSteps
 {
+    WebDrone drone;
+    @Before
+    public void beforeScenario()
+    {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("share-po-context.xml");
+        drone = (WebDrone) ctx.getBean("webDrone");
+    }
+    @After
+    public void afterScenario()
+    {
+        if(drone != null)
+        {
+            drone.quit();
+        }
+    }
+    @Given("^I am admin$")
+    public void iAmAdmin() throws Throwable 
+    {
+        //Do nothing as admin user comes with default installation of alfresco.
+    }
 
-    @Given("^I am on login page$")
+    @When("^I navigate to alfresco$")
     public void navigateToLogin() throws Throwable
     {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        drone.navigateTo("http://localhost:8080/share");
     }
 
-    @When("^login as \"(.*?)\" with password \"(.*?)\"$")
-    public void loginAsUserWitPassword(String username, String password) throws Throwable
+    @And("^I login as \"(.*?)\" with password \"(.*?)\"$")
+    public void loginAsUsernameWitPassword(String username, String password) throws Throwable
     {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        LoginPage loginPage = drone.getCurrentPage().render();
+        loginPage.loginAs(username, password);
     }
+
     @Then("^i should see the dashboard page$")
     public void iShouldSeeTheDashboard_page() throws Throwable
     {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        DashBoardPage result = drone.getCurrentPage().render();
+        Assert.assertNotNull(result);
     }
 }

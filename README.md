@@ -12,9 +12,9 @@ Git:
 Subversion:
 
     svn checkout https://github.com/michaelsuzukisagi/alfresco-e2e-cuecumber-jvm.git
-    cd cucumber-java-skeleton
+    cd alfresco-e2e-cuecumber-jvm
 
-Or simply [download](https://github.com/cucumber/cucumber-java-skeleton/releases) a zip or tarball.
+
 
 ### Use Maven
 
@@ -61,12 +61,12 @@ That should list all the available options.
 
 Specify a particular scenario by *line* (and use the pretty format)
 
-    -Dcucumber.options="classpath:skeleton/belly.feature:4 --format pretty"
+    -Dcucumber.options="classpath:alfresco-e2e/login.feature:4 --format pretty"
 
 This works because Maven puts `./src/test/resources` on your `classpath`.
 You can also specify files to run by filesystem path:
 
-    -Dcucumber.options="src/test/resources/skeleton/belly.feature:4 --format pretty"
+    -Dcucumber.options="src/test/resources/alfresco-e2e/login.feature:4 --format pretty"
 
 You can also specify what to run by *tag*:
 

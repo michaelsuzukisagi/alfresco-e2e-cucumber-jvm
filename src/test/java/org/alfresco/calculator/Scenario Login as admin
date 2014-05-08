@@ -1,5 +1,0 @@
-Scenario Login as admin
-Given I am on login page
-When I provide my username “admin”
-and password “admin"
-Then I should see the dashboard page
