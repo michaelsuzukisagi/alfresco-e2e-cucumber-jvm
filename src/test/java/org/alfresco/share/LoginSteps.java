@@ -3,9 +3,9 @@ package org.alfresco.share;
 import org.alfresco.po.share.DashBoardPage;
 import org.alfresco.po.share.LoginPage;
 import org.alfresco.webdrone.WebDrone;
-import org.junit.Assert;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.testng.Assert;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
