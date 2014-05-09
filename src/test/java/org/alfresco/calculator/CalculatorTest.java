@@ -1,9 +1,7 @@
 package org.alfresco.calculator;
 
 import cucumber.api.CucumberOptions;
-import cucumber.api.junit.Cucumber;
-import org.junit.runner.RunWith;
+import cucumber.api.testng.AbstractTestNGCucumberTests;
 
-@RunWith(Cucumber.class)
 @CucumberOptions(format = {"pretty"})
-public class CalculatorTest { }
+public class CalculatorTest extends AbstractTestNGCucumberTests{ }
