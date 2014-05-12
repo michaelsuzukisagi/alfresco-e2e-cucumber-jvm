@@ -18,8 +18,10 @@
  */
 package org.alfresco.share;
 
-import org.alfresco.po.share.DashBoardPage;
 import org.alfresco.po.share.LoginPage;
+import org.alfresco.po.share.SharePage;
+import org.alfresco.po.share.site.CreateSitePage;
+import org.alfresco.po.share.site.SiteDashboardPage;
 import org.alfresco.webdrone.WebDrone;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -27,19 +29,20 @@ import org.testng.Assert;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 /**
- * Steps to enable login feature.
+ * Steps to enable site creation feature.
+ * 
  * @author Michael Suzuki
  *
  */
-public class LoginSteps
+public class SiteSteps implements BasicSteps
 {
-    WebDrone drone;
+    private WebDrone drone;
+    
     @Before
     public void beforeScenario()
     {
@@ -54,35 +57,32 @@ public class LoginSteps
             drone.quit();
         }
     }
-    @Given("^I am admin$")
-    public void iAmAdmin() throws Throwable 
+    
+    @When("^I create a site \"(.*?)\"$")
+    public void createASite(String siteName) throws Throwable 
     {
-        //Do nothing as admin user comes with default installation of alfresco.
+        SharePage page = drone.getCurrentPage().render();
+        CreateSitePage createSitePage = page.getNav().selectCreateSite().render();
+        String name = siteName + System.currentTimeMillis();
+        createSitePage.createNewSite(name);
     }
 
-    @When("^I navigate to alfresco$")
-    public void navigateToLogin() throws Throwable
+    @Then("^i should see the site dashboard page$")
+    public void iShouldSeeTheSiteDashboardPage() throws Throwable 
     {
-        drone.navigateTo("http://localhost:8080/share");
+        SiteDashboardPage page = drone.getCurrentPage().render();
+        Assert.assertNotNull(page);
     }
 
-    @And("^I login as \"(.*?)\" with password \"(.*?)\"$")
-    public void loginAsUsernameWitPassword(String username, String password) throws Throwable
+    @Override
+    @Given("^I am logged in as \"(.*?)\" with password \"(.*?)\"$")
+    public void iAmLoggedInAs(String username, String password)
+            throws Throwable
     {
-        LoginPage loginPage = drone.getCurrentPage().render();
-        loginPage.loginAs(username, password);
+        String url = "http://localhost:8080/share";
+        drone.navigateTo(url);
+        LoginPage login = drone.getCurrentPage().render();
+        login.loginAs(username, password);
     }
 
-    @Then("^i should see the dashboard page$")
-    public void iShouldSeeTheDashboard_page() throws Throwable
-    {
-        DashBoardPage result = drone.getCurrentPage().render();
-        Assert.assertNotNull(result);
-    }
-    @Then("^i should see the login page$")
-    public void i_should_see_the_login_page() throws Throwable 
-    {
-        LoginPage result = drone.getCurrentPage().render();
-        Assert.assertNotNull(result);
-    }
 }

@@ -14,7 +14,7 @@
  */
 package org.alfresco.calculator;
 /**
- * Simple calculator.
+ * Simple calculator used to demonstrate BDD demo.
  * @author Michael Suzuki
  * @since 1.0
  */

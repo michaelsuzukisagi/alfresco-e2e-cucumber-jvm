@@ -22,4 +22,4 @@ import cucumber.api.CucumberOptions;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(format = {"pretty"})
-public class LoginTest extends AbstractTestNGCucumberTests{ }
+public class SiteTest extends AbstractTestNGCucumberTests{}
