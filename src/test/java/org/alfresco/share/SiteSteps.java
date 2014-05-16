@@ -39,7 +39,7 @@ import cucumber.api.java.en.When;
  * @author Michael Suzuki
  *
  */
-public class SiteSteps implements BasicSteps
+public class SiteSteps
 {
     private WebDrone drone;
     
@@ -57,13 +57,12 @@ public class SiteSteps implements BasicSteps
             drone.quit();
         }
     }
-    
-    @When("^I create a site \"(.*?)\"$")
-    public void createASite(String siteName) throws Throwable 
+    @When("^I create a site$")
+    public void createASite() throws Throwable 
     {
         SharePage page = drone.getCurrentPage().render();
         CreateSitePage createSitePage = page.getNav().selectCreateSite().render();
-        String name = siteName + System.currentTimeMillis();
+        String name = "test" + System.currentTimeMillis();
         createSitePage.createNewSite(name);
     }
 
@@ -74,7 +73,6 @@ public class SiteSteps implements BasicSteps
         Assert.assertNotNull(page);
     }
 
-    @Override
     @Given("^I am logged in as \"(.*?)\" with password \"(.*?)\"$")
     public void iAmLoggedInAs(String username, String password)
             throws Throwable
