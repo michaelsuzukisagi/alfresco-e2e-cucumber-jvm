@@ -57,8 +57,18 @@ public class SiteSteps
             drone.quit();
         }
     }
+
+    @Given("^I am logged in as \"(.*?)\" with password \"(.*?)\"$")
+    public void iAmLoggedInAsWithPassword(String username, String password) throws Throwable 
+    {
+        String url = "http://localhost:8080/share";
+        drone.navigateTo(url);
+        LoginPage login = drone.getCurrentPage().render();
+        login.loginAs(username, password);
+    }
+
     @When("^I create a site$")
-    public void createASite() throws Throwable 
+    public void iCreateASite() throws Throwable 
     {
         SharePage page = drone.getCurrentPage().render();
         CreateSitePage createSitePage = page.getNav().selectCreateSite().render();
@@ -71,16 +81,6 @@ public class SiteSteps
     {
         SiteDashboardPage page = drone.getCurrentPage().render();
         Assert.assertNotNull(page);
-    }
-
-    @Given("^I am logged in as \"(.*?)\" with password \"(.*?)\"$")
-    public void iAmLoggedInAs(String username, String password)
-            throws Throwable
-    {
-        String url = "http://localhost:8080/share";
-        drone.navigateTo(url);
-        LoginPage login = drone.getCurrentPage().render();
-        login.loginAs(username, password);
     }
 
 }

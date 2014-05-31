@@ -19,7 +19,8 @@
 package org.alfresco.share.site;
 
 import cucumber.api.CucumberOptions;
+import cucumber.api.SnippetType;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 
-@CucumberOptions(format = {"pretty"})
+@CucumberOptions(snippets = SnippetType.CAMELCASE, format = {"pretty"})
 public class SiteTest extends AbstractTestNGCucumberTests{}

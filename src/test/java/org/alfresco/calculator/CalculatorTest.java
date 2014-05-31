@@ -19,7 +19,8 @@
 package org.alfresco.calculator;
 
 import cucumber.api.CucumberOptions;
+import cucumber.api.SnippetType;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 
-@CucumberOptions(format = {"pretty"})
+@CucumberOptions(snippets = SnippetType.CAMELCASE, format = {"pretty"})
 public class CalculatorTest extends AbstractTestNGCucumberTests{ }
