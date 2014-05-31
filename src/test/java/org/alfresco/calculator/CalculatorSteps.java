@@ -18,6 +18,7 @@
  */
 package org.alfresco.calculator;
 
+import org.alfresco.calculator.Calculator;
 import org.testng.Assert;
 
 import cucumber.api.java.en.Given;
@@ -60,4 +61,6 @@ public class CalculatorSteps
     {
         result = calculator.subtraction(arg1, arg2);
     }
+
+
 }

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Alfresco. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.alfresco.share;
+package org.alfresco.share.site;
 
 import org.alfresco.po.share.LoginPage;
 import org.alfresco.po.share.SharePage;
