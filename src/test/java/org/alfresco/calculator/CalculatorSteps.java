@@ -50,9 +50,8 @@ public class CalculatorSteps
     @Then("^outcome should be (\\d+)$")
     public void outcomeShouldBe(int expected) throws Throwable 
     {
-        Assert.assertEquals(expected, result);
+        Assert.assertEquals(result, expected);
     }
-
     @When("^I subtract (\\d+) from (\\d+)$")
     public void iSubtractFrom(int arg1, int arg2) throws Throwable 
     {
