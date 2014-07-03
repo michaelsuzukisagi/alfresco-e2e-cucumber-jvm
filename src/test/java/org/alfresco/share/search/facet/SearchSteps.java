@@ -16,11 +16,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with Alfresco. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.alfresco.share.site;
+
+package org.alfresco.share.search.facet;
 
 import org.alfresco.po.share.SharePage;
-import org.alfresco.po.share.site.CreateSitePage;
-import org.alfresco.po.share.site.SiteDashboardPage;
+import org.alfresco.po.share.search.FacetedSearchPage;
+import org.alfresco.po.share.site.document.DocumentDetailsPage;
 import org.alfresco.share.StepsUtil;
 import org.alfresco.webdrone.WebDrone;
 import org.springframework.context.ApplicationContext;
@@ -32,16 +33,16 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-
 /**
- * Steps to enable site creation feature.
+ * Steps to enable search feature.
  * 
  * @author Michael Suzuki
  *
  */
-public class SiteSteps
+public class SearchSteps
 {
     private WebDrone drone;
+    private FacetedSearchPage resultPage;
     
     @Before
     public void beforeScenario()
@@ -57,27 +58,40 @@ public class SiteSteps
             drone.quit();
         }
     }
-
-    @Given("^I am logged in as \"(.*?)\" with password \"(.*?)\"$")
-    public void iAmLoggedInAsWithPassword(String username, String password) throws Throwable 
+    @Given("^I am a user$")
+    public void iAmAUser() throws Throwable 
     {
-        StepsUtil.login(drone, username, password);
+        StepsUtil.login(drone, "admin", "admin");
     }
-
-    @When("^I create a site$")
-    public void iCreateASite() throws Throwable 
-    {
+    @When("^I search for \"(.*?)\"$")
+    public void iSearchFor(final String term) throws Throwable {
         SharePage page = drone.getCurrentPage().render();
-        CreateSitePage createSitePage = page.getNav().selectCreateSite().render();
-        String name = "test" + System.currentTimeMillis();
-        createSitePage.createNewSite(name);
+        resultPage = page.getNav().getSearch().search(term).render();
     }
-
-    @Then("^i should see the site dashboard page$")
-    public void iShouldSeeTheSiteDashboardPage() throws Throwable 
+    @Then("^I should see search results$")
+    public void iShouldSeeSearchResults() throws Throwable
     {
-        SiteDashboardPage page = drone.getCurrentPage().render();
-        Assert.assertNotNull(page);
+        Assert.assertNotNull(resultPage);
+        resultPage = drone.getCurrentPage().render();
+        Assert.assertNotNull(resultPage.getFacetGroups());
     }
 
+    @Then("^There should be a count of the number of results$")
+    public void thereShouldBeACountOfTheNumberOfResults() throws Throwable 
+    {
+        //TODO
+    }
+
+    @Then("^the results should show the correct data$")
+    public void theResultsShouldShowTheCorrectData() throws Throwable 
+    {
+        //TODO
+    }
+
+    @Then("^Clicking on a result takes me to the document details page for that node\\.$")
+    public void clickingOnAResultTakesMeToTheDocumentDetailsPageForThatNode() throws Throwable 
+    {
+        DocumentDetailsPage page = resultPage.getResults().get(0).clickLink().render();
+        Assert.assertEquals(page.isDocumentDetailsPage(), true);
+    }
 }
