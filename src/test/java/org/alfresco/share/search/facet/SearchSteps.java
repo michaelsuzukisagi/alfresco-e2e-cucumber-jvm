@@ -19,7 +19,11 @@
 
 package org.alfresco.share.search.facet;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.alfresco.po.share.SharePage;
+import org.alfresco.po.share.search.FacetedSearchFacetGroup;
 import org.alfresco.po.share.search.FacetedSearchPage;
 import org.alfresco.po.share.search.FacetedSearchResult;
 import org.alfresco.po.share.site.document.DocumentDetailsPage;
@@ -44,6 +48,7 @@ public class SearchSteps
 {
     private WebDrone drone;
     private FacetedSearchPage resultPage;
+    private List<FacetedSearchFacetGroup> facetGroups;
     
     @Before
     public void beforeScenario()
@@ -65,7 +70,8 @@ public class SearchSteps
         StepsUtil.login(drone, "admin", "admin");
     }
     @When("^I search for \"(.*?)\"$")
-    public void iSearchFor(final String term) throws Throwable {
+    public void iSearchFor(final String term) throws Throwable 
+    {
         SharePage page = drone.getCurrentPage().render();
         resultPage = page.getNav().getSearch().search(term).render();
     }
@@ -101,6 +107,8 @@ public class SearchSteps
     @Given("^I am viewing faceted search results$")
     public void iAmViewingFacetedSearchResults() throws Throwable 
     {
+        iAmAUser();
+        iSearchFor("ipsum");
         iShouldSeeSearchResults();
     }
     
@@ -117,5 +125,23 @@ public class SearchSteps
         {
             Assert.assertTrue(result.getTitle().endsWith(".doc)"));
         }
+    }
+
+    @When("^I look in the facet panel I should see facet categories \"(.*?)\"$")
+    public void iLookInTheFacetPanelIShouldSeeFacetCategories(List<String> categories) throws Throwable 
+    {
+        facetGroups = resultPage.getFacetGroups();
+        Assert.assertNotNull(facetGroups);
+        List<String> actualCategories = new ArrayList<String>();
+        for(FacetedSearchFacetGroup group : facetGroups)
+        {
+            actualCategories.add(group.getGroupLabel());
+        }
+        Assert.assertEquals(actualCategories, categories);
+    }
+    
+    @Then("^those facets have accurate counts$")
+    public void thoseFacetsHaveAccurateCounts() throws Throwable
+    {
     }
 }
