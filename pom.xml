@@ -29,7 +29,7 @@
         <dependency>
             <groupId>org.alfresco</groupId>
             <artifactId>share-po</artifactId>
-            <version>4.3.0-BF-SNAPSHOT</version>
+            <version>5.0-BF-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

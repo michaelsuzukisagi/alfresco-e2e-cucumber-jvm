@@ -21,6 +21,7 @@ package org.alfresco.share.search.facet;
 
 import org.alfresco.po.share.SharePage;
 import org.alfresco.po.share.search.FacetedSearchPage;
+import org.alfresco.po.share.search.FacetedSearchResult;
 import org.alfresco.po.share.site.document.DocumentDetailsPage;
 import org.alfresco.share.StepsUtil;
 import org.alfresco.webdrone.WebDrone;
@@ -79,13 +80,15 @@ public class SearchSteps
     @Then("^There should be a count of the number of results$")
     public void thereShouldBeACountOfTheNumberOfResults() throws Throwable 
     {
-        //TODO
+        Assert.assertEquals(resultPage.getResultCount(),resultPage.getResults().size());
     }
 
     @Then("^the results should show the correct data$")
     public void theResultsShouldShowTheCorrectData() throws Throwable 
     {
-        //TODO
+        Assert.assertEquals(resultPage.getResults().size(), 6);
+        Assert.assertEquals(resultPage.getResults().get(0).getTitle(),"(Project Overview.ppt)");
+        Assert.assertEquals(resultPage.getResults().get(5).getTitle(),"(Meeting Notes 2011-02-10.doc)");
     }
 
     @Then("^Clicking on a result takes me to the document details page for that node\\.$")
@@ -93,5 +96,26 @@ public class SearchSteps
     {
         DocumentDetailsPage page = resultPage.getResults().get(0).clickLink().render();
         Assert.assertEquals(page.isDocumentDetailsPage(), true);
+    }
+    
+    @Given("^I am viewing faceted search results$")
+    public void iAmViewingFacetedSearchResults() throws Throwable 
+    {
+        iShouldSeeSearchResults();
+    }
+    
+    @When("^I click on \"(.*?)\" facet$")
+    public void iClickOnFacet(String facetName) throws Throwable 
+    {
+        resultPage = resultPage.selectFacet(facetName).render();
+    }
+
+    @Then("^the search results are filtered to show only those with the appropriate facet\\.$")
+    public void theSearchResultsAreFilteredToShowOnlyThoseWithTheAppropriateFacet() throws Throwable
+    {
+        for(FacetedSearchResult result:resultPage.getResults())
+        {
+            Assert.assertTrue(result.getTitle().endsWith(".doc)"));
+        }
     }
 }
