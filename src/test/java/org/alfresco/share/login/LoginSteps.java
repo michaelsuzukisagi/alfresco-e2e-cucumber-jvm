@@ -38,11 +38,12 @@ import cucumber.api.java.en.When;
  */
 public class LoginSteps
 {
+    ApplicationContext ctx;
     WebDrone drone;
     @Before
     public void beforeScenario()
     {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("share-po-context.xml");
+        ctx = new ClassPathXmlApplicationContext("share-po-context.xml");
         drone = (WebDrone) ctx.getBean("webDrone");
     }
     @After

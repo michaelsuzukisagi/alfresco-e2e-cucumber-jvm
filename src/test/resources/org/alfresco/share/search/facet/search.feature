@@ -18,5 +18,14 @@ Scenario: Selecting facet from search
 Scenario: Display facets correctly
     Given I am viewing faceted search results
     When I look in the facet panel I should see facet categories "File Type,Creator,Modifier,Size"
-    And those facets have accurate counts
-
+    And those facets have accurate counts:
+    |Microsoft Word|3|
+    |Microsoft PowerPoint|2|
+    |Adobe PDF Document|1|
+    |Alice Beecher|1|
+    |Mike Jackson|5|
+    |Administrator|1|
+    |Mike Jackson|5|
+    |10 to 100KB|3|
+    |100KB to 1MB|1|
+    |1 to 16MB|2|
