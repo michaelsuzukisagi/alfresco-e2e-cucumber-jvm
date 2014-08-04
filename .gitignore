@@ -48,5 +48,4 @@ lib_managed/
 src_managed/
 tools/
 bin/
-test_output/
-
+test-output/
