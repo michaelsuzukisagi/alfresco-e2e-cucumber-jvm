@@ -49,3 +49,4 @@ src_managed/
 tools/
 bin/
 test-output/
+.settings/
