@@ -100,7 +100,7 @@ public class SearchSteps
     {
         Assert.assertEquals(resultPage.getResults().size(), 6);
         Assert.assertEquals(resultPage.getResults().get(0).getTitle(),"(Project Overview.ppt)");
-        Assert.assertEquals(resultPage.getResults().get(5).getTitle(),"(Meeting Notes 2011-02-10.doc)");
+        Assert.assertEquals(resultPage.getResults().get(5).getTitle(),"(Meeting Notes 2011-01-27.doc)");
     }
     
     @Then("^Clicking on a result takes me to the document details page for that node\\.$")
@@ -141,6 +141,7 @@ public class SearchSteps
         List<String> actualCategories = new ArrayList<String>();
         for(FacetedSearchFacetGroup group : facetGroups)
         {
+            System.out.println("adding:"+group.getGroupLabel());
             actualCategories.add(group.getGroupLabel());
         }
         Assert.assertEquals(actualCategories, categories);

@@ -17,7 +17,7 @@ Scenario: Selecting facet from search
     
 Scenario: Display facets correctly
     Given I am viewing faceted search results
-    When I look in the facet panel I should see facet categories "File Type,Creator,Modifier,Size"
+    When I look in the facet panel I should see facet categories "Size, Creator,File Type,Modifier"
     And those facets have accurate counts:
     |Microsoft Word|3|
     |Microsoft PowerPoint|2|
