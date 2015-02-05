@@ -6,12 +6,12 @@ This is a poc project to see how functional test can be used to test Alfresco's 
 
 Git:
 
-    git clone https://github.com/michaelsuzukisagi/alfresco-e2e-cuecumber-jvm.git
+    git clone https://github.com/michaelsuzukisagi/alfresco-e2e-cucumber-jvm.git
     cd alfresco-e2e-cuecumber-jvm
 
 Subversion:
 
-    svn checkout https://github.com/michaelsuzukisagi/alfresco-e2e-cuecumber-jvm.git
+    svn checkout https://github.com/michaelsuzukisagi/alfresco-e2e-cucumber-jvm.git
     cd alfresco-e2e-cuecumber-jvm
 
 
