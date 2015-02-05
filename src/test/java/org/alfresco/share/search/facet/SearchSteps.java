@@ -34,8 +34,7 @@ import org.alfresco.share.StepsUtil;
 import org.alfresco.webdrone.WebDrone;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.testng.Assert;
-
+import org.junit.Assert;
 import cucumber.api.DataTable;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;

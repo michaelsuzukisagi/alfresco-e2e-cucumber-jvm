@@ -1,6 +1,5 @@
 Feature: Faceted search
-Search should display results and facets
-Empty search should not display results and facets
+
 
 Scenario: Search
     Given I am a user 
